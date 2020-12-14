@@ -10,3 +10,6 @@ def criar_log(mensagem, path=None):
         current_time = now.strftime("%Y-%m-%d %H:%M:%S")
         log.write('{} {}\n'.format(current_time, mensagem))
         print('{} {}\n'.format(current_time, mensagem))
+
+
+## Teste stestesfsfsdf
