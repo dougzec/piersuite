@@ -13,3 +13,4 @@ def criar_log(mensagem, path=None):
 
 
 ## Teste stestesfsfsdf
+# fsdçofksdfjsdklfdsj
