@@ -28,7 +28,7 @@ def sheets_faturamento(url, aba, path='.'):
     worksheet.update('A1', [x19.columns.values.tolist()] + x19.values.tolist(), value_input_option='USER_ENTERED')
     worksheet.update('E1', [x19[['CNPJ_CPF']].columns.values.tolist()] + x19[['CNPJ_CPF']].values.tolist(), value_input_option='RAW')
 
-def sheets_carteira(url, aba, path='.', project, table_name):
+def sheets_carteira(url, aba, project, table_name, path='.'):
 
     from google.cloud import bigquery
     from google.oauth2 import service_account
