@@ -27,3 +27,30 @@ def sheets_faturamento(url, aba, path='.'):
     x19.columns = colunas
     worksheet.update('A1', [x19.columns.values.tolist()] + x19.values.tolist(), value_input_option='USER_ENTERED')
     worksheet.update('E1', [x19[['CNPJ_CPF']].columns.values.tolist()] + x19[['CNPJ_CPF']].values.tolist(), value_input_option='RAW')
+
+def sheets_carteira(url, aba, path='.', project, table_name):
+
+    from google.cloud import bigquery
+    from google.oauth2 import service_account
+
+    credentials = service_account.Credentials.from_service_account_file(path + '/key_bigquery.json')
+    client = bigquery.Client(project = project,
+                            credentials = credentials)
+
+    # Salvar no bigquery
+    df = pd.read_gbq("SELECT cnpj, title, grupo FROM reweb.carteira_clientes",
+          project_id = project)
+
+    gc = gspread.service_account(filename=path + '/key_bigquery.json')
+    sh = gc.open_by_key(url) # or by sheet name: gc.open("TestList")
+    worksheet = sh.worksheet(aba)
+
+    worksheet.delete_rows(3,10000000)
+
+    df = df.astype(str)
+    # for coluna in df.loc[:,'Receita':].columns:
+    #    x19[coluna] = x19[coluna].str.replace('.',',')
+
+    # df.columns = colunas
+    worksheet.update('A1', [df.columns.tolist()] + df.values.tolist(), value_input_option='RAW')
+    # worksheet.update('E1', [x19[['CNPJ_CPF']].columns.values.tolist()] + x19[['CNPJ_CPF']].values.tolist(), value_input_option='RAW')
