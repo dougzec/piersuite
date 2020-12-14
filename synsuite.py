@@ -9,6 +9,8 @@ import pandas as pd
 import numpy as np
 from datetime import timedelta, date, datetime
 
+# fsdoifjsdiofjisof
+
 #limpar dados
 def limpar_pasta(path='.'):
     for file in os.listdir(path + '/arquivos_synsuite/'):
