@@ -148,9 +148,7 @@ def get_pipefy_multithread(key_pipefy, CAMPOS, pipe_id, is_carteira = True):
     cart = pd.DataFrame(rs)
     cart = cart.fillna('Sem Dados')
 
-    if CAMPOS is None:
-        return cart
-    elif is_carteira == False:
+    if is_carteira == False:
         return cart
     else:
         cart.grupo = np.where((cart.grupo == '0.0'), 'Sem Dados', cart.grupo)
